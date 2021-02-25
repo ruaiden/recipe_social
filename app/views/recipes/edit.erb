@@ -1,6 +1,6 @@
-<h1>Create a New Recipe </h1>
 
-<form method="POST" action="/new">
+<form action='/recipes/edit/<%=@recipe.id%>' method='post'>
+<input id='hidden' type='hidden' name='_method' value='patch'>
 <label>Title:</label>
     <input type="TEXT" name="title">
 <br>
@@ -14,5 +14,5 @@
 <input type="TEXT" name="instructions">
 <br>
 
-<input type="submit" value="New Recipe"> 
+<input type="submit" value="Edit Recipe"> 
 </form>
