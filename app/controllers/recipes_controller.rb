@@ -10,4 +10,10 @@ class RecipesController < ApplicationController
         erb :"recipes/show"
     end 
 
+    get '/recipes/new' do 
+        @recipe = Recipe.new(params)
+        erb :'recipes/new'
+
+    end 
+
 end 
