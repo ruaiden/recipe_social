@@ -12,6 +12,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/new" do 
+    @user = User.new
     erb :new
   end 
 
@@ -21,7 +22,8 @@ class ApplicationController < Sinatra::Base
 
   post "/new" do 
    
-    @user = User.new(:name => params[:name], :email => params[:email], :password => params[:password])
+    # @user = User.new(:name => params[:name], :email => params[:email], :password => params[:password])
+    @user = User.create(params)
     
     redirect to '/login'
   end
