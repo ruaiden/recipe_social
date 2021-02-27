@@ -2,5 +2,13 @@
 <h1><%=@recipe.title%></h1>
 
 <h3><%=@recipe.ingredients.capitalize%></h3>
+<h3><%=@recipe.time%></h3>
+<h3><%=@recipe.instruction.capitalize%></h3>
 
-<a href="/recipes">Main Menu </a>
+<a href='/recipes/edit/<%=@recipe.id%>'>Edit Recipe</a>
+<a href="/recipes">Main Menu </a><br><br><br><br>
+<form method="post" action="/recipes/<%= @recipe.id %>">
+<input id="hidden" type="hidden" name="_method" value="DELETE">
+<input type="submit" value="Delete Recipe">
+</form> 
+

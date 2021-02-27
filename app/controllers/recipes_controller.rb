@@ -30,16 +30,18 @@ class RecipesController < ApplicationController
         redirect to "/recipes/#{@recipe.id}"
     end 
 
-    # patch '/recipes/edit/:id' do 
-    #     @recipe = Recipe.find(params[:id])
-    #     @recipe.update(params[:recipe]
-    #     # redirect to "/recipes/#{@recipe.id}"
-    # end 
+    patch '/recipes/edit/:id' do 
+        @recipe = Recipe.find(params[:id])
+        
+        @recipe.update(params[:recipe])
+         redirect to "/recipes/#{@recipe.id}"
+    end 
 
     delete '/recipes/:id' do 
+        @recipe = Recipe.find_by_id(params[:id])
+        @recipe.delete
 
-        Recipe.destroy(params[:id])
-        # redirect to "/recipes"
+        redirect to "/recipes"
     end 
 
 
