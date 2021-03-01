@@ -6,14 +6,25 @@ class RecipesController < ApplicationController
     end 
 
     get '/recipes/new' do 
-        # @recipe = Recipe.new(params)
-        @recipe = Recipe.new
-        erb :'recipes/new'
+     
+        if @current_user == session[:user_id]
+            @recipe = Recipe.new
+            erb :'recipes/new'
+        else
+            erb :index
         end 
+    end 
 
     get '/recipes/:id' do
         @recipe = Recipe.find_by_id(params[:id])
-        erb :"recipes/show"
+        binding.pry
+        if @recipe.user_id == current_user
+            erb :"recipes/show"
+        else 
+            @recipe = Recipe.all
+            @error = "Not Authorized"
+            erb :account
+        end 
     end 
 
     
