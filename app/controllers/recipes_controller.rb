@@ -1,59 +1,62 @@
 class RecipesController < ApplicationController
 
-    get '/recipes' do 
+    get '/recipes/new' do
+        
+        @recipe = Recipe.new
+        erb :'recipes/new'
+    end
+
+     get '/recipes' do 
         @recipe = Recipe.all 
         erb :"recipes/recipe"
     end 
 
-    get '/recipes/new' do 
-     
-        if @current_user == session[:user_id]
-            @recipe = Recipe.new
-            erb :'recipes/new'
-        else
-            erb :index
-        end 
-    end 
 
     get '/recipes/:id' do
-        @recipe = Recipe.find_by_id(params[:id])
-        binding.pry
-        if @recipe.user_id == current_user
+     
+            @recipe = Recipe.find_by_id(params[:id])
+            @current_user = session[:user_id] == @recipe.user_id
+            binding.pry
             erb :"recipes/show"
-        else 
-            @recipe = Recipe.all
-            @error = "Not Authorized"
-            erb :account
-        end 
-    end 
-
     
+        
+    end 
 
     get '/recipes/edit/:id' do 
        
-        @recipe = Recipe.find_by_id(params[:id])
-        erb :'recipes/edit'
+        @recipe = Recipe.find_by_id(params[:id])   
+            erb :'recipes/edit'
+        
     end 
 
     post '/recipes/new' do 
+    
         @recipe = Recipe.create(params)
-
-        redirect to "/recipes/#{@recipe.id}"
+        erb :'recipes/show'
+  
     end 
 
-    patch '/recipes/edit/:id' do 
-        @recipe = Recipe.find(params[:id])
-        
-        @recipe.update(params[:recipe])
-         redirect to "/recipes/#{@recipe.id}"
-    end 
+    # patch '/recipes/edit/:id' do 
+    #     @recipe = Recipe.find(id: params[:id])
+    #     # binding.pry
+    #     # if @recipe.update(params[:recipe])@recipe.update(params[:recipe]) && @recipe.user_id == current_user
+    #     #     redirect to "/recipes/#{@recipe.id}"
+    #     # else
+    #     #     puts "Sorry"
+    #     # end 
+    # end 
 
-    delete '/recipes/:id' do 
-        @recipe = Recipe.find_by_id(params[:id])
-        @recipe.delete
+    
 
-        redirect to "/recipes"
-    end 
-
-
+    # delete '/recipes/:id' do 
+    #     @recipe = Recipe.find_by_id(params[:id])
+    #     if @recipe.user_id == current_user
+    #         @recipe.delete
+    #         redirect to "/recipes"
+    #     else 
+    #         erb :login
+    #     end
+    # end 
 end 
+
+ 

@@ -14,5 +14,12 @@
 <input type="TEXT" name="instruction">
 <br>
 
+User:
+
+<%User.all.each do |user|%>
+    <input type="CHECKBOX" name="user_id" id="<%=user.id%>" value="<%=user.id%>"><%=user.name%></input>
+<%end%>
+
+
 <input type="submit" value="New Recipe"> 
 </form>
