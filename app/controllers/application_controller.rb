@@ -22,6 +22,12 @@ class ApplicationController < Sinatra::Base
     erb :login
   end 
 
+  get "/logout" do 
+    session.clear
+    redirect '/login'
+  end 
+
+
   post "/new" do
     @user = User.new(params)
     @user.save
@@ -35,22 +41,24 @@ class ApplicationController < Sinatra::Base
   post "/login" do
     
     @user = User.find_by(:email => params[:email])
-   
-  
+
     if @user.authenticate(params[:password])
-      session[:user_id]=@user.id
+      session[:user_id] = @user.id
       erb :account
     else
       redirect to '/login'
     end
+      
+   
     end 
 
-#   get "/logout" do 
-#     session.clear
-
-#     redirect '/login'
-#   end 
-
+  delete '/delete' do 
+    binding.pry
+    
+    @user = User.all.find_by_id(params[:id])
+        @user.delete
+        redirect to "/login"
+end 
 #   helpers do 
 
 #   def logged_in?
@@ -60,11 +68,6 @@ class ApplicationController < Sinatra::Base
 #   def current_user
 #     @current_user ||= User.find(session[:user_id]) if 
 #     session[:user_id].present?
-#   end 
-
-#   def require_login
-#     unless logged_in?
-#       redirect '/login'
 #   end 
 # end 
 # end

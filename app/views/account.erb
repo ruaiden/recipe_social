@@ -1,6 +1,18 @@
 <h1> Welcome <%=@user.name%></h1>
 
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLptunrG_2Gz4CCdn3vLpLQ1-2CYVFVOBWjg&usqp=CAU" alt="chef">
+<br>
+<br>
+<br>
 
 <a href='/recipes'>List Recipes</a><br>
 <a href='/recipes/new'>Create New Recipe </a><br>
+
+
 <a href='/logout'>Log Off</a>
+<br>
+<br>
+<form method="post" action="/delete">
+<input id="hidden" type="hidden" name="_method" value="DELETE">
+<input type="submit" value="Delete Account">
+</form> 
