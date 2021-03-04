@@ -9,7 +9,7 @@
 
 <%if @current_user%>
 <a href='/recipes/edit/<%=@recipe.id%>'>Edit Recipe</a>
-
+<br>
 <form method="post" action="/recipes/<%= @recipe.id %>">
 <input id="hidden" type="hidden" name="_method" value="DELETE">
 <input type="submit" value="Delete Recipe">

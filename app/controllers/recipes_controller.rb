@@ -16,7 +16,7 @@ class RecipesController < ApplicationController
      
             @recipe = Recipe.find_by_id(params[:id])
             @current_user = session[:user_id] == @recipe.user_id
-            binding.pry
+            
             erb :"recipes/show"
     
         
@@ -36,27 +36,20 @@ class RecipesController < ApplicationController
   
     end 
 
-    # patch '/recipes/edit/:id' do 
-    #     @recipe = Recipe.find(id: params[:id])
-    #     # binding.pry
-    #     # if @recipe.update(params[:recipe])@recipe.update(params[:recipe]) && @recipe.user_id == current_user
-    #     #     redirect to "/recipes/#{@recipe.id}"
-    #     # else
-    #     #     puts "Sorry"
-    #     # end 
-    # end 
+    patch '/recipes/edit/:id' do 
+        @recipe = Recipe.find(params[:id])
+        @recipe.update(params[:recipe])
+
+        redirect to "/recipes/#{@recipe.id}"
+        
+    end 
 
     
-
-    # delete '/recipes/:id' do 
-    #     @recipe = Recipe.find_by_id(params[:id])
-    #     if @recipe.user_id == current_user
-    #         @recipe.delete
-    #         redirect to "/recipes"
-    #     else 
-    #         erb :login
-    #     end
-    # end 
+    delete '/recipes/:id' do 
+        @recipe = Recipe.find_by_id(params[:id])
+            @recipe.delete
+            redirect to "/recipes"
+    end 
 end 
 
  

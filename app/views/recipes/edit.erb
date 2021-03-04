@@ -1,6 +1,6 @@
 
 <form action='/recipes/edit/<%=@recipe.id%>' method='post'>
-<input type='hidden' name='_method' value='patch'>
+<input type='hidden' value='patch' name='_method'>
 <label>Ingredients:</label>
     <input type="TEXT" name="recipe[instruction]" value="<%=@recipe.ingredients%>">
 <br>
