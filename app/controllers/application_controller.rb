@@ -29,6 +29,8 @@ class ApplicationController < Sinatra::Base
 
 
   post "/new" do
+    binding.pry
+  
     @user = User.new(params)
     @user.save
     
@@ -42,7 +44,8 @@ class ApplicationController < Sinatra::Base
     
     @user = User.find_by(:email => params[:email])
 
-    if @user.authenticate(params[:password])
+    if @user 
+      @user.authenticate(params[:password])
       session[:user_id] = @user.id
       erb :account
     else
@@ -54,10 +57,10 @@ class ApplicationController < Sinatra::Base
 
   delete '/delete' do 
     binding.pry
-    
-    @user = User.all.find_by_id(params[:id])
+    @user = User.find_by(params[:id])
         @user.delete
-        redirect to "/login"
+        
+        redirect to '/login'
 end 
 #   helpers do 
 

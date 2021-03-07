@@ -12,7 +12,10 @@
 <a href='/logout'>Log Off</a>
 <br>
 <br>
-<form method="post" action="/delete">
-<input id="hidden" type="hidden" name="_method" value="DELETE">
-<input type="submit" value="Delete Account">
-</form> 
+
+ <form action="/delete" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="hidden" name="id" value=<%= @user.id %>>
+    <button type="submit">Delete</button>
+ </form>
+
