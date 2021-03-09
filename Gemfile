@@ -7,6 +7,8 @@
   gem 'sinatra-activerecord'
   gem 'rake'
   gem 'bcrypt'
+ gem 'rack-flash3'
+  
 
 
   group :development do

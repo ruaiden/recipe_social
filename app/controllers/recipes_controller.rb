@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+    
 
     get '/recipes/new' do
         
@@ -32,6 +33,8 @@ class RecipesController < ApplicationController
     post '/recipes/new' do 
     
         @recipe = Recipe.create(params)
+
+        flash[:message] = "Successfully created recipe."
         erb :'recipes/show'
   
     end 

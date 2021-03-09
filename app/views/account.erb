@@ -5,11 +5,22 @@
 <br>
 <br>
 
-<a href='/recipes'>List Recipes</a><br>
-<a href='/recipes/new'>Create New Recipe </a><br>
+<h2> My First Recipe </h2>
+<%myrecipe = Recipe.all%>
+<%@list = myrecipe.where(id: session[:user_id])%>
+<%@list.each do |r| %>
+<h3><%=r.title%></h3>
+<h6><%=r.time%> minutes </h6>
+<h6><%=r.instruction.capitalize%></h6>
+<br>
+<%end%>
+<br>
+<br>
 
-
+<a href='/recipes'>List Recipes</a>
+<a href='/recipes/new'>Create New Recipe </a>
 <a href='/logout'>Log Off</a>
+<br>
 <br>
 <br>
 
@@ -18,4 +29,8 @@
     <input type="hidden" name="id" value=<%= @user.id %>>
     <button type="submit">Delete</button>
  </form>
+
+ <% if @message %>
+ <%= @message %>
+ <%end%>
 

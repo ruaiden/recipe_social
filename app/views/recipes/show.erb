@@ -1,8 +1,13 @@
 
 <h1><%=@recipe.title%></h1>
+<h3><%=@recipe.time%> minutes </h3>
+<br>
+<h3><%@ingredients = @recipe.ingredients.split(", ")%></h3>
+<%@ingredients.each do |i|%>
+<%=i.capitalize%>
+<br>
+<%end%>
 
-<h3><%=@recipe.ingredients.capitalize%></h3>
-<h3><%=@recipe.time%></h3>
 <h3><%=@recipe.instruction.capitalize%></h3>
 
 <a href="/recipes">Main Menu </a><br><br><br><br>

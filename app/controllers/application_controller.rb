@@ -1,13 +1,16 @@
 require './config/environment'
+require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
+  
 
   configure do
-    enable :sessions
-    set :session_secret, "secret"
     set :public_folder, 'public'
+    enable :sessions
     set :views, 'app/views'
+    set :session_secret, "secret"  
     set :method_override, true
+    use Rack::Flash
   end
 
   get "/" do
@@ -24,6 +27,7 @@ class ApplicationController < Sinatra::Base
 
   get "/logout" do 
     session.clear
+    flash[:message] = "Come Again!"
     redirect '/login'
   end 
 
@@ -32,9 +36,11 @@ class ApplicationController < Sinatra::Base
     binding.pry
   
     @user = User.new(params)
+    @user.valid?
     @user.save
     
     session[:user_id]=@user.id
+    
     
     erb :"login"
   end 
@@ -47,8 +53,11 @@ class ApplicationController < Sinatra::Base
     if @user 
       @user.authenticate(params[:password])
       session[:user_id] = @user.id
+      flash[:message] = "You've been successfully logged in"
+      binding.pry
       erb :account
     else
+      flash[:message] = "Login failed. Try again."
       redirect to '/login'
     end
       
