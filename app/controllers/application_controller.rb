@@ -43,8 +43,7 @@ class ApplicationController < Sinatra::Base
 
 
   post "/new" do
-    binding.pry
-  
+   
     @user = User.new(params)
     @user.valid?
     @user.save
@@ -61,8 +60,7 @@ class ApplicationController < Sinatra::Base
     @user = User.find_by(:email => params[:email])
 binding.pry
 
-    if @user 
-      @user.authenticate(params[:password])
+    if @user.authenticate(params[:password]) 
       session[:user_id] = @user.id
       flash[:message] = "You've been successfully logged in"
       binding.pry
