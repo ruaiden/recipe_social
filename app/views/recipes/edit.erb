@@ -7,9 +7,18 @@
 <label>Cook Time:</label>
 <input type="integer" name="recipe[time]" value="<%=@recipe.time%>">
 <br>
-<label>Instructions:</label>
-<input type="TEXT" name="recipe[instruction]" value="<%=@recipe.instruction%>">
+<label>Step 1:</label>
+<input type="TEXT" name="recipe[step_1]" value="<%=@recipe.step_1%>">
 <br>
+<label>Step 2:</label>
+<input type="TEXT" name="recipe[step_2]" value="<%=@recipe.step_2%>">
+<br>
+<label>Step 3:</label>
+<input type="TEXT" name="recipe[step_3]" value="<%=@recipe.step_3%>">
+<br>
+<label>URL:</label>
+    <input type="LINK" name="url" value="<%=@recipe.url%>">
+
 
 <input type="submit" value="Edit Recipe"> 
 </form>

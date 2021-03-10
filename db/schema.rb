@@ -16,8 +16,11 @@ ActiveRecord::Schema.define(version: 3) do
     t.string "title"
     t.string "ingredients"
     t.integer "time"
-    t.string "instruction"
+    t.string "step_1"
+    t.string "step_2"
+    t.string "step_3"
     t.integer "user_id"
+    t.text "url"
   end
 
   create_table "recipes_users", force: :cascade do |t|

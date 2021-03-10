@@ -5,13 +5,15 @@
 <br>
 <br>
 
-<h2> My First Recipe </h2>
+<h2> My Recipes </h2>
 <%myrecipe = Recipe.all%>
-<%@list = myrecipe.where(id: session[:user_id])%>
+<%@list = myrecipe.where(user_id: session[:user_id])%>
 <%@list.each do |r| %>
 <h3><%=r.title%></h3>
 <h6><%=r.time%> minutes </h6>
-<h6><%=r.instruction.capitalize%></h6>
+<h6>Step 1: <%=r.step_1.capitalize%></h6>
+<h6>Step 2:<%=r.step_2.capitalize%></h6>
+<h6>Step 3:<%=r.step_3.capitalize%></h6>
 <br>
 <%end%>
 <br>

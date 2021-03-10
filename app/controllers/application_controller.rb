@@ -25,6 +25,16 @@ class ApplicationController < Sinatra::Base
     erb :login
   end 
 
+  get "/account" do 
+    @user = @user = User.find_by(params[:id])
+    binding.pry
+    if session[:user_id] = @user.id
+      erb :account
+    else 
+      erb :login
+    end 
+  end 
+
   get "/logout" do 
     session.clear
     flash[:message] = "Come Again!"
@@ -49,6 +59,7 @@ class ApplicationController < Sinatra::Base
   post "/login" do
     
     @user = User.find_by(:email => params[:email])
+binding.pry
 
     if @user 
       @user.authenticate(params[:password])
@@ -64,9 +75,10 @@ class ApplicationController < Sinatra::Base
    
     end 
 
+
   delete '/delete' do 
     binding.pry
-    @user = User.find_by(params[:id])
+    @user = User.find_by(id: params[:id])
         @user.delete
         
         redirect to '/login'

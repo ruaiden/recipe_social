@@ -1,15 +1,21 @@
 
-<h1><%=@recipe.title%></h1>
+<h1><a href="<%=@recipe.url%>" target="_blank"><%=@recipe.title%></a></h1>
 <h3><%=@recipe.time%> minutes </h3>
 <br>
 <h3><%@ingredients = @recipe.ingredients.split(", ")%></h3>
 <%@ingredients.each do |i|%>
+<input type="CHECKBOX" name="ingredients"</input>
 <%=i.capitalize%>
 <br>
+<br>
 <%end%>
-
-<h3><%=@recipe.instruction.capitalize%></h3>
-
+<br>
+<h4>1. <%=@recipe.step_1.capitalize%></h4>
+<br>
+<h4>2. <%=@recipe.step_2.capitalize%></h4>
+<br>
+<h4>3. <%=@recipe.step_3.capitalize%></h4>
+<br>
 <a href="/recipes">Main Menu </a><br><br><br><br>
 
 <%if @current_user%>
