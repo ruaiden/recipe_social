@@ -1,6 +1,16 @@
-<h1>Recipes </h1>
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Recipe Social</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href='/account'>Account</a></li>
+        <li><a href="/logout">Log Off</a></li>
+       
+      </ul>
+    </div>
+  </nav>
 <br>
-<ul>
+<h2>Choose Recipe </h2>
+<br>
 <%@recipe.each do |r|%>
 
 <a href="/recipes/<%=r.id%>"> 
@@ -13,5 +23,3 @@
 
 <br>
 
-<a href='/account'>Account </a>
-<a href='/logout'>Log Off</a>

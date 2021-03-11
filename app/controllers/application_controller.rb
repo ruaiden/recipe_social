@@ -10,7 +10,8 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     set :session_secret, "secret"  
     set :method_override, true
-    use Rack::Flash
+    register Sinatra::Flash
+
   end
 
   get "/" do
@@ -27,17 +28,17 @@ class ApplicationController < Sinatra::Base
 
   get "/account" do 
     @user = @user = User.find_by(params[:id])
-    binding.pry
+    
     if session[:user_id] = @user.id
       erb :account
     else 
-      erb :login
+      redirect to '/login'
     end 
   end 
 
   get "/logout" do 
     session.clear
-    flash[:message] = "Come Again!"
+    flash[:info] = "You are logged out"
     redirect '/login'
   end 
 
@@ -57,16 +58,12 @@ class ApplicationController < Sinatra::Base
 
   post "/login" do
     
-    @user = User.find_by(:email => params[:email])
-binding.pry
-
+    @user = User.find_by(:email => params[:email])  
     if @user.authenticate(params[:password]) 
       session[:user_id] = @user.id
-      flash[:message] = "You've been successfully logged in"
-      binding.pry
       erb :account
     else
-      flash[:message] = "Login failed. Try again."
+      flash[:error] = "Invalid login"   
       redirect to '/login'
     end
       
@@ -75,7 +72,6 @@ binding.pry
 
 
   delete '/delete' do 
-    binding.pry
     @user = User.find_by(id: params[:id])
         @user.delete
         

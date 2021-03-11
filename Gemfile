@@ -8,6 +8,8 @@
   gem 'rake'
   gem 'bcrypt'
  gem 'rack-flash3'
+ gem 'sinatra-flash'
+ gem 'faker'
   
 
 

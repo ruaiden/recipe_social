@@ -1,3 +1,14 @@
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Recipe Social</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href='/recipes'>List Recipes</a></li>
+        <li><a href='/recipes/new'>Create New Recipe </a></li>
+        <li><a href='/logout'>Log Off</a></li>
+      </ul>
+    </div>
+  </nav>
+
 <h1> Welcome <%=@user.name%></h1>
 
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLptunrG_2Gz4CCdn3vLpLQ1-2CYVFVOBWjg&usqp=CAU" alt="chef">
@@ -9,7 +20,7 @@
 <%myrecipe = Recipe.all%>
 <%@list = myrecipe.where(user_id: session[:user_id])%>
 <%@list.each do |r| %>
-<h3><a href='/recipes/<%=r.id%>'><%=r.title%></a></h3>
+<h4><a href='/recipes/<%=r.id%>'><%=r.title%></a></h4>
 <h6><%=r.time%> minutes </h6>
 <br>
 <h6>Step 1: <%=r.step_1.capitalize%></h6>
@@ -20,20 +31,12 @@
 <br>
 <br>
 
-<a href='/recipes'>List Recipes</a>
-<a href='/recipes/new'>Create New Recipe </a>
-<a href='/logout'>Log Off</a>
-<br>
-<br>
-<br>
-
  <form action="/delete" method="post">
     <input type="hidden" name="_method" value="delete">
     <input type="hidden" name="id" value=<%= @user.id %>>
-    <button type="submit">Delete</button>
+    <button type="submit">Delete User</button>
  </form>
 
- <% if @message %>
- <%= @message %>
- <%end%>
+
+  
 
