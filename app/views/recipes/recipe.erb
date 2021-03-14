@@ -9,15 +9,25 @@
     </div>
   </nav>
 <br>
-<h2>Choose Recipe </h2>
+<h1>Choose a Recipe </h1>
+<h5> Enjoy your amazing meal!</h5>
 <br>
-<%@recipe.each do |r|%>
 
+
+<%@recipe.each do |r|%>
 <a href="/recipes/<%=r.id%>"> 
-<li><%=r.title%></li>
-</a>
+  <ul>
+  <li><u><%=r.title%></u></li>
+  </ul></a>
+    <%if r.user_id == session[:user_id]%>
+      <a href='/recipes/edit/<%=r.id%>'>Edit</a>
+      <form method="post" action="/recipes/<%= r.id%>">
+      <input id="hidden" type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="Delete Recipe"></form> 
+    <%end%>
 <%end%>
-</ul>
+<br>
+
 
 
 

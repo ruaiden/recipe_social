@@ -2,6 +2,9 @@ class RecipesController < ApplicationController
     
     get '/recipes' do 
         @recipe = Recipe.all 
+        @recipe_user = Recipe.find_by(user_id: session[:user_id])
+        @current_user = session[:user_id] == @recipe_user.user_id
+   
         erb :"recipes/recipe"
     end 
 
@@ -21,6 +24,7 @@ class RecipesController < ApplicationController
     get '/recipes/edit/:id' do 
       
         @recipe = Recipe.find_by(id: params[:id])
+        
         erb :'recipes/edit'
         
     end 
@@ -28,7 +32,6 @@ class RecipesController < ApplicationController
     patch '/recipes/:id' do 
         @recipe = Recipe.find(params[:id])
         @recipe.update(params[:recipe])
-
         redirect to "/recipes/#{@recipe.id}"
         
     end 
@@ -37,7 +40,8 @@ class RecipesController < ApplicationController
     post '/recipes/new' do 
     
         @recipe = Recipe.create(params)
-
+        @recipe.user_id = session[:user_id]
+        @recipe.save
         flash[:message] = "Successfully created recipe."
         erb :'recipes/show'
   
