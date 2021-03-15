@@ -23,13 +23,15 @@ class RecipesController < ApplicationController
 
     get '/recipes/edit/:id' do 
       
-        @recipe = Recipe.find_by(id: params[:id])
+       current_user
+            recipe = Recipe.find_by(id: params[:id])
+            erb :'recipes/edit'
         
-        erb :'recipes/edit'
         
     end 
 
     patch '/recipes/:id' do 
+        current_user
         @recipe = Recipe.find(params[:id])
         @recipe.update(params[:recipe])
         redirect to "/recipes/#{@recipe.id}"
@@ -48,12 +50,24 @@ class RecipesController < ApplicationController
     end
 
     delete '/recipes/:id' do 
+        current_user
         @recipe = Recipe.find_by_id(params[:id])
             @recipe.delete
             redirect to "/recipes"
     end 
- 
+
+    helpers do 
+
+        def current_user
+            @recipe = Recipe.find_by(id: params[:id])
+                unless @current_user = session[:user_id] == @recipe.user_id
+                    redirect to '/login'
+                end   
+        end 
+    end 
 
 end 
+
+
 
  
